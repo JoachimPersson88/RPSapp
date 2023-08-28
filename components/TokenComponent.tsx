@@ -1,6 +1,5 @@
 //TokenComponent.tsx
-import React, { useEffect, useState } from "react";
-import { createContext } from "react";
+import React, { useEffect, useState, createContext } from 'react';
 import { fetchNewToken } from "../api";
 import GameBoard from "../GameBoard";
 

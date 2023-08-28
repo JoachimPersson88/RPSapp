@@ -1,22 +1,23 @@
 //GameBoard.tsx
 
 //Importera nödvändiga dependencies
-import { useContext, useState } from "react";
-import { TokenComponent } from "./components/TokenComponent";
-import {gameInfoUpdate, getAllGames, makeMoveFunction, setNameFunction, startGameFunction} from "./api";
+import React, { useContext, useState } from 'react';
+import { TokenComponent } from './components/TokenComponent';
+import { TokenContext } from './components/TokenComponent';
 import SetNameComponent from './components/SetNameComponent';
 import GameOptionsComponent from './components/GameOptionsComponent';
 import GameListComponent from './components/GameListComponent';
+import { View } from 'react-native';
+import { makeMoveFunction, setNameFunction, gameInfoUpdate, startGameFunction, getAllGames } from './api';
 import MoveButtonsComponent from './components/MoveButtonsComponent';
 import StatusMessagesComponent from './components/StatusMessagesComponent';
-
 //Main GameBoard funktionskomponent som håller spellogiken
 function GameBoard() {
     //Deklarera och initiera nödvändiga tillstånds- och kontextvariabler
-    const {token} = useContext(TokenComponent)
-    const [players, setPlayers] = useState([])
+    const { token } = useContext(TokenContext);
+    const [players, setPlayers] = useState([]);
     const [gameId, setGameId] = useState("")
-    const [name, setname] = useState("")
+    const [name, setName] = useState("");
     const [showMoves, setShowMoves] = useState(false)
     const [showGames, setShowGames] = useState(false)
     const [showWaitingForMove, setShowWaitingForMove] = useState(false)
@@ -134,6 +135,7 @@ function GameBoard() {
     }
     //Huvudrendering av GameBoard-komponenten som villkorligt visar andra komponenter baserat på spelets tillstånd
     return (
+        <View>
         <>
             {showSetName && <SetNameComponent name={name} setName={setname} setAnonymousPlayer={setAnonymousPlayer} />}
             {showGames && <GameOptionsComponent startGame={startGame} getPlayers={getPlayers} />}
@@ -141,8 +143,9 @@ function GameBoard() {
             {showMoves && <MoveButtonsComponent makeMoveStone={makePlayerMoveStone} makeMovePaper={makePlayerMovePaper} makeMoveScissor={makePlayerMoveScissor} />}
             <StatusMessagesComponent showWaitingForMove={showWaitingForMove} showWin={showWin} showLose={showLose} showDraw={showDraw} newGame={newGame} />
         </>
-    )
-}
+        </View>
+        );
+    };
 
 export default GameBoard;
 

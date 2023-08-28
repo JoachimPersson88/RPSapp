@@ -1,5 +1,5 @@
 // api.ts
-
+import axios from 'axios';
 // Skapar token till spelaren
 export const fetchNewToken = () =>
     fetch("http://localhost:8080/rock-paper-scissors/auth/token").then((response) =>

@@ -1,5 +1,6 @@
 //StatusMessagesComponent.tsx
 import React from 'react';
+import { View, TouchableOpacity, Text } from 'react-native';
 
 interface StatusMessage {
     showWaitingForMove: boolean;
@@ -7,26 +8,23 @@ interface StatusMessage {
     showLose: boolean;
     showDraw: boolean;
     newGame: () => void;
-}
+  }
 //Klasskomponent för spelstatus
 class StatusMessagesComponent extends React.Component<StatusMessage> {
     render() {
-        let {showWaitingForMove, showWin, showLose, showDraw, newGame} = this.props;
-        return (
-            <>
-                {showWaitingForMove && <div className="fade-in-smc"><h1>Waiting for opponent</h1></div>}
-                {showWin && <div className="fade-in-smc jiggle"><h1>You won!</h1>
-                    <button className="button-hover-scale-smc" onClick={newGame}>Play AGAIN!</button>
-                </div>}
-                {showLose && <div className="fade-in-smc jiggle"><h1>You lost!</h1>
-                    <button className="button-hover-scale-smc" onClick={newGame}>Play again?</button>
-                </div>}
-                {showDraw && <div className="fade-in-smc"><h1>It's a draw!</h1>
-                    <button className="button-hover-scale-smc" onClick={newGame}>Play again?</button>
-                </div>}
-            </>
-        );
+      let {showWaitingForMove, showWin, showLose, showDraw, newGame} = this.props;
+      return (
+        <View>
+          {showWaitingForMove && <Text>Waiting for opponent</Text>}
+          {showWin && <Text>You won!</Text>}
+          {showLose && <Text>You lost!</Text>}
+          {showDraw && <Text>It's a draw!</Text>}
+          {(showWin || showLose || showDraw) && <TouchableOpacity onPress={newGame}>
+            <Text>Play again?</Text>
+          </TouchableOpacity>}
+        </View>
+      );
     }
-}
+  }
 
 export default StatusMessagesComponent;
