@@ -6,5 +6,8 @@ const TokenContext = createContext({
   setToken: () => {},
 });
 
+console.log("TokenContext value:", TokenContext);
+
 export default TokenContext;
+
 
